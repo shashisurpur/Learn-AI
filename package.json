@@ -1,0 +1,44 @@
+{
+  "name": "deepseek",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@clerk/nextjs": "^6.12.6",
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "@google/genai": "^1.28.0",
+    "@google/generative-ai": "^0.21.0",
+    "@langchain/community": "^1.0.0",
+    "@langchain/core": "^1.0.0",
+    "@langchain/google-genai": "^1.0.0",
+    "@langchain/mongodb": "^1.0.0",
+    "axios": "^1.8.4",
+    "cookie": "^1.0.2",
+    "langchain": "^1.0.2",
+    "mongodb": "^6.20.0",
+    "mongoose": "^8.12.1",
+    "next": "15.2.3",
+    "openai": "^4.89.0",
+    "pdf-parse": "^1.1.1",
+    "prismjs": "^1.30.0",
+    "react": "^19.0.0",
+    "react-confetti": "^6.4.0",
+    "react-dom": "^19.0.0",
+    "react-hot-toast": "^2.5.2",
+    "react-markdown": "^10.1.0",
+    "svix": "^1.62.0",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "eslint": "^9",
+    "eslint-config-next": "15.2.3",
+    "tailwindcss": "^4"
+  }
+}
