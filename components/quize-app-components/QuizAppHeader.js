@@ -10,7 +10,7 @@ const QuizAppHeader = ({ back }) => {
                     onClick={back}
                 >
                     <i className="fa fa-long-arrow-left text-white" aria-hidden="true"></i>
-                    <span>Back to AI Quiz</span>
+                    <span className=' hidden md:flex'>Back to AI Quiz</span>
 
                 </button>
                     :
@@ -19,7 +19,7 @@ const QuizAppHeader = ({ back }) => {
                         // onClick={back}
                         >
                             <i className="fa fa-long-arrow-left text-white" aria-hidden="true"></i>
-                            <span>Back to My AI</span>
+                            <span className=' hidden md:flex'>Back to My AI</span>
                         </button>
                     </Link>
 
@@ -34,7 +34,7 @@ const QuizAppHeader = ({ back }) => {
                 back &&
                 <div className='w-[10%]'></div>
             } */}
-            <div className='pr-[120px]'></div>
+            <div className='md:pr-[120px]'></div>
         </div>
         // </div>
     )

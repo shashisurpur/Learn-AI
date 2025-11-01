@@ -44,10 +44,10 @@ const QuizMainScreen = ({ prompt, setPrompt, handleQuizOptions }) => {
             </div>
             <div className="flex-1">
                 <div className={`flex justify-center items-center `}>
-                    <div className='w-[50%] bg-[#404045] p-4 rounded-3xl mt-4 transition-all'>
+                    <div className='w-full max-w-xs md:max-w-3xl bg-[#404045] p-4 rounded-3xl mt-4 transition-all'>
                         <textarea
                             onKeyDown={(e) => handleKeyDown(e)}
-                            className="outline-none w-full resize-none overflow-hidden break-words bg-transparent"
+                            className="outline-none w-full resize-none overflow-hidden wrap-break-word bg-transparent"
                             rows={2}
                             placeholder="Message..."
                             required

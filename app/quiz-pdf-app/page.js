@@ -221,10 +221,8 @@ const QuizPdf = () => {
             <div className='flex p-4 justify-between items-center bg-[#292a2d] sticky top-0 z-30'>
                 <Link href={'/'} prefetch>
                     <button className='p-2 cursor-pointer flex items-center gap-2 bg-black text-[16px] rounded-lg'
-                    // onClick={backToAiOptions}
+                    // onClick={back}
                     >
-                                <i className="fa-solid fa-party-horn text-blue-500"></i>
-
                         <i className="fa fa-long-arrow-left text-white" aria-hidden="true"></i>
                         <span className=' hidden md:flex'>Back to My AI</span>
                     </button>

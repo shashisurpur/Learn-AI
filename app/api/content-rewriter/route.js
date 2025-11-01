@@ -1,12 +1,4 @@
-
-const MAX_TOKENS_LIMT = 5;
-export const MAX_DURATION = 60; //seconds
-import connectDB from "@/config/db";
-import Chat from "@/models/Chat";
-import RequestLimit from "@/models/Guest";
-import { getAuth } from "@clerk/nextjs/server";
 import { GoogleGenAI } from "@google/genai";
-import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
 // const ai = new GoogleGenAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY);
@@ -15,37 +7,62 @@ const ai = new GoogleGenAI({
 });
 
 
-const transformText = (mode, context) => {
-    let systemPromt = ''
-    let userPrompt = ''
+const transformText = async (mode, context) => {
+   
+    let prompt =''
     switch (mode) {
-        case 'summarize':
-            systemPromt = 'You summarize text into clear key points.'
-            userPrompt = `Summarize this:\n\n${context}`
+        case 'summarise':
+            prompt =`Summarize the following text into clear, concise key points.
+- Focus only on the most important facts or ideas.
+- Use bullet points.
+- Avoid repetition or unnecessary details.
+
+Text:
+${context}`
             break;
         case 'rephrase':
-            systemPromt = 'You rephrase text in different words while keeping meaning.'
-            userPrompt = `Rephrase this:\n\n${context}`
+            prompt = `Rephrase the following text in a clear, natural tone.
+Keep the original meaning, but make it sound more fluent and natural.
+-Avoid adding new ideas.
+
+Text:
+${context}`
             break;
         case 'explain_simply':
-            systemPromt = 'You explain text in simple language.'
-            userPrompt = `Explain this:\n\n${context}`
+            prompt = `Explain the following text in simple, easy-to-understand language:
+-Avoid adding new ideas.        
+
+Text:
+${context}`
             break;
         default:
             throw new Error("Invalid mode")
     }
 
-    // const result = await ai.chats.create()
+    // const result = await ai
+    const result = await ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        // contents:`${systemPromt}\n\n${userPrompt}`,
+        contents:prompt,
+        config: {
+            thinkingConfig: {
+                thinkingBudget: 0, // Disables thinking
+            },
+        }
+
+    })
+
+    return result.text
 }
 
 export async function POST(req) {
     try {
 
         const { mode, context } = await req.json();
+        // console.log(mode,context,'mode, context');
+        const result = await transformText(mode, context);
 
-
-
-        return NextResponse.json({ success: true, data: '' }, { status: 200 })
+        return NextResponse.json({ success: true, data: result }, { status: 200 })
     } catch (err) {
         console.error(err);
         return NextResponse.json({ success: false, error: err.message }, { status: 500 })

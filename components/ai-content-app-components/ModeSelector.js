@@ -1,3 +1,4 @@
+import { BookOpen, FileText, RefreshCw } from 'lucide-react';
 import React from 'react'
 
 const Modes = [
@@ -5,28 +6,28 @@ const Modes = [
         id: 'summarise',
         lable: 'Summarise',
         description: "Condense text to key points",
-        icon: 'icon',
+        icon: FileText,
         gradient: 'from-emerald-500 to-teal-600'
     },
     {
         id: 'rephrase',
         lable: 'Rephrase',
         description: "Rewrite with different words",
-        icon: 'icon',
+        icon: RefreshCw ,
         gradient: 'from-blue-500 to-cyan-600'
     },
     {
         id: 'explain_simply',
         lable: 'Explain Simply',
         description: "Use simple language",
-        icon: 'icon',
+        icon: BookOpen,
         gradient: 'from-orange-500 to-amber-600'
     },
 ]
 
 const ModeSelector = ({ selectedMode, onSelectMode }) => {
     return (
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
             {
                 Modes.map((mode) => {
                     const Icon = mode.icon;
@@ -36,12 +37,12 @@ const ModeSelector = ({ selectedMode, onSelectMode }) => {
                         <button
                             key={mode.id}
                             onClick={()=>(onSelectMode(mode.id))}
-                            className={`group relative p-6 rounded-xl transition-all duration-300 overflow-hidden ${isSelected ? 'scale-105 shadow-xl':'hover:scale-105 hover:shadow-lg'}`}
+                            className={`group relative p-6 rounded-xl transition-all duration-300 overflow-hidden ${isSelected ? 'scale-100 shadow-xl':'hover:scale-105 hover:shadow-lg'}`}
                             
                         >
                             {/* Bacckground gradien */}
                             <div 
-                            className={`absolute inset-0 bg-gradient-to-br group-hover:opacity-10 transition-all ${mode.gradient}
+                            className={`absolute inset-0 bg-linear-to-br group-hover:opacity-10 transition-all ${mode.gradient}
                              opacity-${isSelected ? '100':'0'} transition-all group-hover:opacity-10`}
                             ></div>
                             {/* Border and backgroun */}
@@ -52,9 +53,8 @@ const ModeSelector = ({ selectedMode, onSelectMode }) => {
                             <div className='relative z-10 flex flex-col items-center text-center gap-3'>
                                 {/* icon */}
                                 <div className={`p-3 rounded-lg ${isSelected ? 'bg-white/20' : 'text-gray-600'} transition-all`}>
-                                <Icon 
-                                className={`${isSelected ? 'text-white':'text-gray-400'}`}
-                                />
+                                {/* {mode.icon} */}
+                                <Icon />
                                 </div>
                                 {/* Lable and description */}
                                 <div>
