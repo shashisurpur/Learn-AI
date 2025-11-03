@@ -49,7 +49,7 @@ const QuizMainScreen = ({ prompt, setPrompt, handleQuizOptions }) => {
                             onKeyDown={(e) => handleKeyDown(e)}
                             className="outline-none w-full resize-none overflow-hidden wrap-break-word bg-transparent"
                             rows={2}
-                            placeholder="Message..."
+                            placeholder="Type your topic here..."
                             required
                             value={prompt}
                             onChange={(e) => setPrompt(e.target.value)}

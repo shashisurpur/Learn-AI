@@ -1,5 +1,6 @@
 "use client";
 
+import { useAppContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -10,6 +11,7 @@ import { useEffect } from "react";
 export default function Home() {
 
   const router = useRouter();
+  const { theme, toggleTheme } = useAppContext();
 
   const cards = [
     {
@@ -39,7 +41,11 @@ export default function Home() {
       title: "AI Content Rewriter",
       description: "This isn't just about paraphrasing, it's about transformation and optimization for the modern digital landscape.",
       path: "/ai-content-rewriter"
-
+    },
+    {
+      title: "AI Email Writer",
+      description: " Coming Soon: An AI-powered email composition tool to help you craft professional and effective emails quickly.",
+      path: "/"
     },
   ];
 
@@ -60,10 +66,16 @@ export default function Home() {
   return (
     <div >
       <div className="text-center sticky top-0 z-50 bg-[#292a2d] text-white p-4 shadow-2xl">
-        <p className="text-3xl"> LEARN WITH AI</p>
+        <p className="text-3xl uppercase">AI Companion</p>
+        {/* <button
+          onClick={toggleTheme}
+          className="px-4 py-2 bg-gray-200 dark:bg-blue-700 text-gray-800 dark:text-red-600 rounded-md transition-colors"
+        >
+          {theme === 'light' ? '🌞 Light' : '🌙 Dark'}
+        </button> */}
       </div>
 
-      
+
       <div className="min-h-screen bg-[#292a2d] flex items-center justify-center  p-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-3xl">
 

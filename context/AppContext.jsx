@@ -20,6 +20,7 @@ export const AppContextProvider = ({ children }) => {
   const [activeChat, setActiveChat] = useState(null);
   const [freeRequests, setFreeRequests] = useState(0);
   const [loadingChats, setLoadingChats] = useState(false);
+  const [theme, setTheme] = useState('light');
 
   const createNewChat = async () => {
     try {
@@ -68,17 +69,35 @@ export const AppContextProvider = ({ children }) => {
     }
   }
 
-  const getGuestLimit = async() => {
-    try{
-      const {data} = await axios.get('/api/limit')
-      console.log('Guest limit',data)
-      if(data.success){
+  const getGuestLimit = async () => {
+    try {
+      const { data } = await axios.get('/api/limit')
+      console.log('Guest limit', data)
+      if (data.success) {
         setFreeRequests(data.requests)
       }
-    }catch(error){
-      console.log(error,'Failed to get guest limit')
+    } catch (error) {
+      console.log(error, 'Failed to get guest limit')
     }
   }
+
+ 
+
+ useEffect(() => {
+    // const stored = localStorage.getItem('theme');
+    // const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // const initial = stored || (prefersDark ? 'dark' : 'light');
+    // setTheme(initial);
+    // document.documentElement.classList.toggle('dark', initial === 'dark');
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === 'light' ? 'dark' : 'light';
+    console.log('Toggling theme to:', next);
+    setTheme(next);
+    localStorage.setItem('theme', next);
+    document.documentElement.classList.toggle('dark', next === 'dark');
+  };
 
 
   // useEffect(() => {
@@ -117,7 +136,9 @@ export const AppContextProvider = ({ children }) => {
     freeRequests,
     setFreeRequests,
     setLoadingChats,
-    getGuestLimit
+    getGuestLimit,
+    toggleTheme,
+    theme
   };
   console.log(freeRequests, 'free')
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
