@@ -18,7 +18,12 @@ const InputSection = ({
                     aria-label='Switch to text input'
                     className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-md transition-all
                          ${inputMode === 'text' ? 'bg-gray-700 text-blue-400 shadow-lg' : 'text-gray-400 hover:text-gray-200'}`}
-                    onClick={() => onInputChange('text')}
+                    onClick={() => {
+                        onInputChange('text')
+                        onTextChange('')
+                        onUrlChange('')
+
+                    }}
                 >
                     {/* File icon */}
                     {/* <i className="fa-regular fa-file-lines"></i> */}
@@ -29,7 +34,11 @@ const InputSection = ({
                     aria-label='Switch to text input'
                     className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-md transition-all
                          ${inputMode === 'url' ? 'bg-gray-700 text-blue-400 shadow-lg' : 'text-gray-400 hover:text-gray-200'}`}
-                    onClick={() => onInputChange('url')}
+                    onClick={() => {
+                        onInputChange('url')
+                        onUrlChange('')
+                        onTextChange('')
+                    }}
                 >
                     {/* URL icon */}
                     {/* <i className="fa-solid fa-link"></i> */}
@@ -69,6 +78,8 @@ const InputSection = ({
                                 />
                                 <input
                                     type="url"
+                                    value={url}
+                                    onChange={(e)=>onUrlChange(e.target.value)}
                                     placeholder='https://example.com'
                                     className='w-full pl-12 pr-4 py-4 rounded-lg border-2 border-gray-700 bg-gray-800 text-gray-100
                      placeholder-gray-500 focus-ring-2 focusring-blue-500 focus:border-transparent transition-all'

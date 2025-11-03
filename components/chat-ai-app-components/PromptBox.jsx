@@ -117,7 +117,7 @@ const PromptBox = ({ loading, setLoading }) => {
   return (
     <form
       className={`w-full ${activeChat?.messages.length > 0 ? "max-w-3xl" : "max-w-2xl"
-        } bg-[#404045] p-4 rounded-3xl mt-4 transition-all`}
+        } bg-[#404045] p-4 rounded-3xl mt-4 transition-all `}
       onSubmit={handleSubmit}
     // onSubmit={limitCheck}
     >

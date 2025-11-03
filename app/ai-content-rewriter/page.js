@@ -19,10 +19,11 @@ const ContentRewriter = () => {
 
     const handleTransform = async () => {
         setLoading(true)
+
         try {
             const res = await fetch('/api/content-rewriter', {
                 method: 'POST',
-                body: JSON.stringify({ mode: selectedMode, context: inputText }),
+                body: JSON.stringify({ mode: selectedMode, context: inputText, url: urlText }),
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -51,30 +52,34 @@ const ContentRewriter = () => {
     return (
         <div className='min-h-screen  transition-all'>
             <div className='relative container mx-auto  max-w-7xl'>
-                <header className='flex py-4 justify-between items-center mb-12 sticky top-0 z-50 bg-[#292a2d]'>
+                <header className='flex py-4 justify-between items-center gap-6 md:gap-0 mb-12 sticky top-0 z-50 bg-[#292a2d]'>
+                <div className="relative group">
                     <Link href={'/'} prefetch>
                         <button className='p-2 cursor-pointer flex items-center gap-2 bg-black text-[16px] rounded-lg'
                         // onClick={backToAiOptions}
                         >
                             {/* <i className="fa fa-long-arrow-left text-white" aria-hidden="true"></i> */}
-                            <MoveLeft className='w-4 h-4 text-white'/>
+                            <MoveLeft className='w-6 h-6 text-white' />
                             <span className=' hidden md:flex'>Back to My AI</span>
+                            <div className="max-w-xs absolute shadow-lg hidden group-hover:block bg-[#333] text-white font-semibold px-3 py-[6px] text-[13px] right-0 left-0 mx-auto w-max -bottom-10 rounded before:w-4 before:h-4 before:rotate-45 before:bg-[#333] before:absolute before:z-[-1] before:-top-1 before:left-0  before:right-0 before:mx-auto">
+                                Back to My AI</div>
                         </button>
                     </Link>
-                    <div className='flex items-center gap-4'>
+                    </div>
+                    <div className='flex items-center gap-2 md:gap-4'>
 
                         <div className='relative'>
                             <div className=' absolute inset-0 bg-linear-to-br from-blue-600 to-cyan-600 
                             rounded-2xl blur-lg opacity-60'></div>
-                            <div className='relative p-3 bg-linear-to-br from-blue-600 to-cyan-600 
+                            <div className='relative p-2 md:p-3 bg-linear-to-br from-blue-600 to-cyan-600 
                             rounded-2xl shadow-lg'>
                                 {/* wand icon of className="w-8 h-8 text-white" */}
                                 {/* <i className="fa-solid fa-wand-magic-sparkles  text-white"></i> */}
-                                <WandSparkles className='w-8 h-8 text-white' />
+                                <WandSparkles className='w-6 h-6 md:w-8 md:h-8 text-white' />
                             </div>
                         </div>
                         <div>
-                            <h1 className='text-3xl font-bold bg-linear-to-br from-white to-gray-300
+                            <h1 className='text-base md:text-3xl font-bold bg-linear-to-br from-white to-gray-300
                             bg-clip-text text-transparent'>AI Content Rewriter</h1>
                             <p className='text-sm text-gray-400 mt-1'>
                                 Transform your content with AI-powered intelligence
@@ -82,7 +87,7 @@ const ContentRewriter = () => {
                         </div>
                     </div>
                     {/* dark button */}
-                    <button className='pr-10'></button>
+                    <button className='md:pr-10'></button>
                 </header>
                 {/* section */}
                 <div className=' space-y-8'>
@@ -130,7 +135,7 @@ const ContentRewriter = () => {
                              transition-all cursor-pointer duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl
                               hover:shadow-2xl overflow-hidden'
                             onClick={handleTransform}
-                        // disabled={ !canTransform || !loading}
+                            disabled={!canTransform || loading}
                         >
                             <div className=' absolute inset-0 bg-linear-to-r from-blue-600 via-cyan-600 to-blue-600
                                  bg-size[200%_100%]'></div>

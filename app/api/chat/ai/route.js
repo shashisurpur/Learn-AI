@@ -21,6 +21,11 @@ export async function POST(req) {
         const { userId } = getAuth(req)
         const { chatId, prompt } = await req.json();
 
+        const customPrompt = `You are a Kannada speaking assistant. Please reply in Kannada to what the user said.
+User's message: ${prompt}`;
+
+        // const customPrompt = `ನೀವು ಕನ್ನಡದಲ್ಲಿ ಮಾತನಾಡುವ ಸಹಾಯಕ. ಬಳಕೆದಾರರು ಹೇಳಿದನ್ನು ಕನ್ನಡದಲ್ಲಿ ಅರ್ಥಮಾಡಿ ಉತ್ತರಿಸಿ.
+        //   ಬಳಕೆದಾರ: ${prompt}`;
         const userPrompt = {
             role: "user",
             content: prompt,
@@ -45,22 +50,23 @@ export async function POST(req) {
                 })
                 // await guest.save();
                 // return NextResponse({ success: true, data: message, requests: rateLimitStore[ip].count }, { status: 200 })
-            }else{
+            } else {
                 const diffHours = (now - guest.lastRequest) / (1000 * 60 * 60);
-                 if (diffHours >= 24) {
-                    guest.count =1;
+                if (diffHours >= 24) {
+                    guest.count = 1;
                     guest.lastRequest = now;
                     // await guest.save();
-                 }
-                 guest.count += 1 ;
-                 guest.lastRequest = now;                 
+                }
+                guest.count += 1;
+                guest.lastRequest = now;
             }
-            
-            if(guest.count > MAX_TOKENS_LIMT){
-                return NextResponse.json({ success: false, message: 'Daily limit exceeds. Please login to continue...',requests:MAX_TOKENS_LIMT }, { status: 429 })
+
+            if (guest.count > MAX_TOKENS_LIMT) {
+                return NextResponse.json({ success: false, message: 'Daily limit exceeds. Please login to continue...', requests: MAX_TOKENS_LIMT }, { status: 429 })
             }
             const response = await ai.models.generateContent({
                 model: "gemini-2.5-flash",
+                // contents: customPrompt,
                 contents: prompt,
                 config: {
                     thinkingConfig: {
@@ -89,6 +95,7 @@ export async function POST(req) {
         //call to gemini api
         const response = await ai.models.generateContent({
             model: "gemini-2.5-flash",
+            // contents: customPrompt,
             contents: prompt,
             config: {
                 thinkingConfig: {

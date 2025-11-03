@@ -1,6 +1,7 @@
 'use client'
 import { assets } from '@/assets/assets'
 import Header from '@/components/chat-ai-app-components/Header'
+
 import Message from '@/components/chat-ai-app-components/Message'
 import PromptBox from '@/components/chat-ai-app-components/PromptBox'
 import Sidebar from '@/components/chat-ai-app-components/Sidebar'
@@ -14,7 +15,7 @@ const ChatAi = () => {
     const [loading, setLoading] = useState(false);
     const [messages, setMessages] = useState([]);
 
-    const { activeChat, freeRequests, loadingChats,user,setLoadingChats,fetchUserChats,setActiveChat,setChats,getGuestLimit } = useAppContext();
+    const { activeChat, freeRequests, loadingChats, user, setLoadingChats, fetchUserChats, setActiveChat, setChats, getGuestLimit } = useAppContext();
     const containerRef = useRef(null);
     console.log(activeChat, 'activeChats')
 
@@ -45,6 +46,8 @@ const ChatAi = () => {
         if (!user) {
             // setLoadingChats(false)
             setActiveChat(null)
+
+            getGuestLimit()
             setChats([])
 
         }
@@ -54,16 +57,17 @@ const ChatAi = () => {
     }, [user]);
 
 
-    useEffect(() => {
-        if (!user) {
-            getGuestLimit()
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (!user) {
+    //         getGuestLimit()
+    //     }
+    // }, [])
 
 
     return (
         <div className="flex h-screen">
             <Sidebar expand={expand} setExpand={setExpand} />
+           
             <div className="flex-1 flex flex-col items-center justify-center px-4 pb-8  relative">
                 {/* <div className="absolute px-4 top-6 flex items-center justify-between w-full">
           <div className="md:hidden">
@@ -160,6 +164,8 @@ const ChatAi = () => {
 
                 {/* Prompt Box */}
                 <PromptBox loading={loading} setLoading={setLoading} />
+                {/* <KannadaKeyboard /> */}
+                
                 <p className="text-xs bottom-1 absolute text-gray-500">
                     AI-generated, for reference only
                 </p>

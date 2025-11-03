@@ -14,14 +14,14 @@ const Modes = [
         lable: 'Rephrase',
         description: "Rewrite with different words",
         icon: RefreshCw ,
-        gradient: 'from-blue-500 to-cyan-600'
+        gradient: 'from-blue-500 to-cyan-400'
     },
     {
         id: 'explain_simply',
         lable: 'Explain Simply',
         description: "Use simple language",
         icon: BookOpen,
-        gradient: 'from-orange-500 to-amber-600'
+        gradient: 'from-orange-500 to-amber-400'
     },
 ]
 

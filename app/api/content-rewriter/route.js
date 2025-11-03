@@ -1,5 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import { NextResponse } from "next/server";
+import * as cheerio from "cheerio";
 
 // const ai = new GoogleGenAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY);
 const ai = new GoogleGenAI({
@@ -8,11 +9,11 @@ const ai = new GoogleGenAI({
 
 
 const transformText = async (mode, context) => {
-   
-    let prompt =''
+
+    let prompt = ''
     switch (mode) {
         case 'summarise':
-            prompt =`Summarize the following text into clear, concise key points.
+            prompt = `Summarize the following text into clear, concise key points.
 - Focus only on the most important facts or ideas.
 - Use bullet points.
 - Avoid repetition or unnecessary details.
@@ -43,7 +44,7 @@ ${context}`
     const result = await ai.models.generateContent({
         model: "gemini-2.5-flash",
         // contents:`${systemPromt}\n\n${userPrompt}`,
-        contents:prompt,
+        contents: prompt,
         config: {
             thinkingConfig: {
                 thinkingBudget: 0, // Disables thinking
@@ -58,11 +59,37 @@ ${context}`
 export async function POST(req) {
     try {
 
-        const { mode, context } = await req.json();
+        const { mode, context, url } = await req.json();
         // console.log(mode,context,'mode, context');
-        const result = await transformText(mode, context);
+        if (!url) {
+            const result = await transformText(mode, context);
+            return NextResponse.json({ success: true, data: result }, { status: 200 })
+        }
 
-        return NextResponse.json({ success: true, data: result }, { status: 200 })
+        const response = await fetch(url);
+        const html = await response.text();
+
+        // Extract visible text using cheerio
+        const $ = cheerio.load(html);
+        const text = $("body").text().replace(/\s+/g, " ").trim().slice(0, 8000);
+
+        const prompt = `Explain the following webpage content in simple, clear language:\n\n${text}`;
+
+        const result = await ai.models.generateContent({
+            model: "gemini-2.5-flash",
+            // contents:`${systemPromt}\n\n${userPrompt}`,
+            contents: prompt,
+            config: {
+                thinkingConfig: {
+                    thinkingBudget: 0, // Disables thinking
+                },
+            }
+
+        })
+        const finalResult = result.text;
+
+        return NextResponse.json({ success: true, data: finalResult }, { status: 200 })
+
     } catch (err) {
         console.error(err);
         return NextResponse.json({ success: false, error: err.message }, { status: 500 })

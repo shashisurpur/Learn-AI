@@ -37,8 +37,8 @@ export default function Home() {
     },
     {
       title: "AI Content Rewriter",
-      description: "Coming soon",
-      path: "/"
+      description: "This isn't just about paraphrasing, it's about transformation and optimization for the modern digital landscape.",
+      path: "/ai-content-rewriter"
 
     },
   ];
@@ -63,7 +63,8 @@ export default function Home() {
         <p className="text-3xl"> LEARN WITH AI</p>
       </div>
 
-      <div className="min-h-screen bg-[#292a2d] flex items-center justify-center p-6">
+      
+      <div className="min-h-screen bg-[#292a2d] flex items-center justify-center  p-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-3xl">
 
           {cards.map((card, i) => (
