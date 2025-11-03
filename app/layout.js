@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
           
           <body
             // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-            className={`${inter.className} antialiased bg-white dark:bg-[#292a2d] text-white`}
+            className={`${inter.className} antialiased  bg-[#292a2d] text-white`}
           >
             <Toaster
               toastOptions={{
