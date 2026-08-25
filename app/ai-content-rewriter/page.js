@@ -51,20 +51,21 @@ const ContentRewriter = () => {
     console.log(canTransform, 'canTransform');
     return (
         <div className='min-h-screen  transition-all'>
-            <div className='relative container mx-auto  max-w-7xl'>
-                <header className='flex py-4 justify-between items-center gap-6 md:gap-0 mb-12 sticky top-0 z-50 bg-[#292a2d]'>
-                <div className="relative group">
-                    <Link href={'/'} prefetch>
-                        <button className='p-2 cursor-pointer flex items-center gap-2 bg-black text-[16px] rounded-lg'
-                        // onClick={backToAiOptions}
-                        >
-                            {/* <i className="fa fa-long-arrow-left text-white" aria-hidden="true"></i> */}
-                            <MoveLeft className='w-6 h-6 text-white' />
-                            <span className=' hidden md:flex'>Back to My AI</span>
-                            <div className="max-w-xs absolute shadow-lg hidden group-hover:block bg-[#333] text-white font-semibold px-3 py-[6px] text-[13px] right-0 left-0 mx-auto w-max -bottom-10 rounded before:w-4 before:h-4 before:rotate-45 before:bg-[#333] before:absolute before:z-[-1] before:-top-1 before:left-0  before:right-0 before:mx-auto">
-                                Back to My AI</div>
-                        </button>
-                    </Link>
+            <div className=''>
+                <header className='flex py-4 justify-between items-center gap-6 md:gap-0 mb-12 sticky top-0 z-50 bg-[#292a2d] shadow-2xl'>
+
+                    <div className="relative group ml-10">
+                        <Link href={'/'} prefetch>
+                            <button className='p-2 cursor-pointer flex items-center gap-2 bg-black text-[16px] rounded-lg'
+                            // onClick={backToAiOptions}
+                            >
+                                {/* <i className="fa fa-long-arrow-left text-white" aria-hidden="true"></i> */}
+                                <MoveLeft className='w-6 h-6 text-white' />
+                                <span className=' hidden md:flex'>Back to My AI</span>
+                                <div className="max-w-xs absolute shadow-lg hidden group-hover:block bg-[#333] text-white font-semibold px-3 py-[6px] text-[13px] right-0 left-0 mx-auto w-max -bottom-10 rounded before:w-4 before:h-4 before:rotate-45 before:bg-[#333] before:absolute before:z-[-1] before:-top-1 before:left-0  before:right-0 before:mx-auto">
+                                    Back to My AI</div>
+                            </button>
+                        </Link>
                     </div>
                     <div className='flex items-center gap-2 md:gap-4'>
 
@@ -80,17 +81,24 @@ const ContentRewriter = () => {
                         </div>
                         <div>
                             <h1 className='text-base md:text-3xl font-bold bg-linear-to-br from-white to-gray-300
-                            bg-clip-text text-transparent'>AI Content Rewriter</h1>
-                            <p className='text-sm text-gray-400 mt-1'>
+                            bg-clip-text text-cyan-600'>AI Content Rewriter</h1>
+                            {/* <p className='text-sm text-gray-400 mt-1'>
                                 Transform your content with AI-powered intelligence
-                            </p>
+                            </p> */}
                         </div>
                     </div>
                     {/* dark button */}
                     <button className='md:pr-10'></button>
+
                 </header>
+
+                <div className='text-center mb-10'>
+                    <p className='text-lg text-gray-400 mt-1'>
+                        Transform your content with AI-powered intelligence
+                    </p>
+                </div>
                 {/* section */}
-                <div className=' space-y-8'>
+                <div className=' space-y-8 relative container mx-auto  max-w-7xl'>
                     <div className='bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl p-8
                          border border-gray-700/50'>
                         <h2 className='text-xl font-bold text-white mb-6'>

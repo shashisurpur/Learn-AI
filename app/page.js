@@ -2,16 +2,13 @@
 
 import { useAppContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-
-
-
-
+import { useEffect, useState } from "react";
 
 export default function Home() {
 
   const router = useRouter();
   const { theme, toggleTheme } = useAppContext();
+  const [isClient, setIsClient] = useState(false);
 
   const cards = [
     {
@@ -43,53 +40,72 @@ export default function Home() {
       path: "/ai-content-rewriter"
     },
     {
+      title: "MedAlt AI",
+      description: "MedAlt AI is an intelligent web application that helps you discover alternative medicines (tablets) for any drug — powered by Gemini AI, RxNorm, and openFDA.",
+      path: "/med-alternative"
+    },
+    {
       title: "AI Email Writer",
       description: " Coming Soon: An AI-powered email composition tool to help you craft professional and effective emails quickly.",
       path: "/"
     },
   ];
 
+  // useEffect(() => {
+  //   router.prefetch("/chat-ai");
+  //   router.prefetch("/chat-with-pdf");
+  //   router.prefetch("/quize-app");
+  //   router.prefetch("/quiz-pdf-app");
+
+
+  // }, [router]);
+
   useEffect(() => {
-    router.prefetch("/chat-ai");
-    router.prefetch("/chat-with-pdf");
-    router.prefetch("/quize-app");
-    router.prefetch("/quiz-pdf-app");
-
-
-  }, [router]);
+    setIsClient(true);
+  }, []);
 
   const handleCardClick = (path) => {
     router.push(`${path}`);
 
   }
 
+  //   if (typeof window !== "undefined") {
+  //   // render something different
+  //   return(
+  //     <div>Error</div>
+  //   )
+  // }
+
+
   return (
     <div >
-      <div className="text-center sticky top-0 z-50 bg-[#292a2d] text-white p-4 shadow-2xl">
-        <p className="text-3xl uppercase">AI Companion</p>
-        {/* <button
+      {isClient ?
+        <div>
+          <div className="text-center sticky top-0 z-50 bg-[#292a2d] text-white p-4 shadow-2xl">
+            <p className="text-3xl uppercase">AI Companion</p>
+            {/* <button
           onClick={toggleTheme}
           className="px-4 py-2 bg-gray-200 dark:bg-blue-700 text-gray-800 dark:text-red-600 rounded-md transition-colors"
         >
           {theme === 'light' ? '🌞 Light' : '🌙 Dark'}
         </button> */}
-      </div>
+          </div>
 
 
-      <div className="min-h-screen bg-[#292a2d] flex items-center justify-center  p-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-3xl">
+          <div className="min-h-screen bg-[#292a2d] flex items-center justify-center  p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-3xl">
 
-          {cards.map((card, i) => (
-            <div
-              key={i}
-              onClick={() => handleCardClick(card.path)}
-              className="bg-[#1e1f22] rounded-xl p-8 text-center text-white shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] cursor-pointer"
-            >
-              <h2 className="text-2xl font-semibold mb-3">{card.title}</h2>
-              <p className="text-gray-300 text-sm">{card.description}</p>
-            </div>
-          ))}
-          {/* <div
+              {cards.map((card, i) => (
+                <div
+                  key={i}
+                  onClick={() => handleCardClick(card.path)}
+                  className="bg-[#1e1f22] rounded-xl p-8 text-center text-white shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] cursor-pointer"
+                >
+                  <h2 className="text-2xl font-semibold mb-3">{card.title}</h2>
+                  <p className="text-gray-300 text-sm">{card.description}</p>
+                </div>
+              ))}
+              {/* <div
             className="bg-[#1e1f22] rounded-xl p-8 text-center text-white shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] cursor-pointer"
           >
             <h2 className="text-xl font-semibold mb-2">Chat Bot</h2>
@@ -97,9 +113,10 @@ export default function Home() {
           </div> */}
 
 
+            </div>
+          </div>
         </div>
-      </div>
-
+        : <div>Loading...</div>}
 
       {/* <div className="bg-[#292a2d] text-white ">
 
