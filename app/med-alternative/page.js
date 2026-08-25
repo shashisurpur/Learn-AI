@@ -113,7 +113,7 @@ export default function Home() {
                             <div className="bg-emerald-600 p-3 rounded-full text-white shadow-lg">
                                 <Pill size={36} />
                             </div>
-                            <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
+                            <h1 className="text-3xl font-extrabold tracking-tight text-emerald-600 sm:text-5xl">
                                 Med<span className="text-emerald-600">Alternative</span>
                             </h1>
                         </div>
