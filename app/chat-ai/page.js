@@ -15,7 +15,7 @@ const ChatAi = () => {
     const [loading, setLoading] = useState(false);
     const [messages, setMessages] = useState([]);
 
-    const { activeChat, freeRequests, loadingChats, user, setLoadingChats, fetchUserChats, setActiveChat, setChats, getGuestLimit } = useAppContext();
+    const { activeChat, freeRequests, user, setLoadingChats, fetchUserChats, setActiveChat, setChats, getGuestLimit } = useAppContext();
     const containerRef = useRef(null);
     console.log(activeChat, 'activeChats')
 

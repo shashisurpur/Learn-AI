@@ -28,7 +28,7 @@ const QuestionCard = ({
 
     useEffect(() => {
         checkedAns && setShowFeedback(true)
-    }, [checkedAns, selected])
+    }, [checkedAns])
 
     useEffect(() => {
         // console.log("Message content:", content);
