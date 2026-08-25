@@ -15,6 +15,7 @@ import {
     MoveLeft
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
     const [medicineName, setMedicineName] = useState("");
@@ -154,7 +155,7 @@ export default function Home() {
                                         </div>
                                     ) : (
                                         <div className="relative rounded-xl overflow-hidden border border-slate-200 bg-gray-800/80 p-2">
-                                            <img
+                                            <Image
                                                 src={imagePreview}
                                                 alt="Uploaded preview"
                                                 className="w-full h-48 object-cover rounded-lg"
@@ -287,7 +288,7 @@ export default function Home() {
                                                 {/* Tablet picture */}
                                                 <div className="relative h-44 bg-gray-800/80  border-b border-slate-100">
                                                     {alt.pictures ? (
-                                                        <img
+                                                        <Image
                                                             src={alt.pictures}
                                                             alt={alt.name}
                                                             className="w-full h-full object-cover"
